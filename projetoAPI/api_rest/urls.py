@@ -5,5 +5,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.get_users, name='get_all_users')
+    path('', views.get_users, name='get_all_users'),
+    path('post/', views.post_users, name='post_any_user')
 ]

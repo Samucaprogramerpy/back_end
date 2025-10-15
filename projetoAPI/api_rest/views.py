@@ -21,3 +21,16 @@ def get_users(request) :
 
         return Response(serializer.data)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+
+def post_users(request) : 
+    if request.method == 'POST' : 
+        new_user = request.data
+        serializer = modelSerializer(data=new_user)
+
+        if serializer.is_valid() : 
+            serializer.save
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
