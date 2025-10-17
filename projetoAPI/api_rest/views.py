@@ -31,6 +31,18 @@ def post_users(request) :
         serializer = modelSerializer(data=new_user)
 
         if serializer.is_valid() : 
-            serializer.save
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['DELETE'])
+
+def delete_user(request) : 
+    if request.method == "DELETE" : 
+        try : 
+            user_to_delete = User.objects.get(pk=request.data['id'])
+            user_to_delete.delete()
+            return Response(status=status.HTTP_200_OK)
+        except : 
+            return Response(status=status.HTTP_400_BAD_REQUEST)
